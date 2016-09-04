@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <libgen.h>
 
 unsigned int data_seed;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -374,8 +375,9 @@ void fill_truth(char *path, char **labels, int k, float *truth)
     int i;
     memset(truth, 0, k*sizeof(float));
     int count = 0;
+	char* filename = basename(strdup(path));
     for(i = 0; i < k; ++i){
-        if(strstr(path, labels[i])){
+        if(strstr(filename, labels[i])){
             truth[i] = 1;
             ++count;
         }
