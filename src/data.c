@@ -1,3 +1,5 @@
+#define _GNU_SOURCE
+
 #include "data.h"
 #include "utils.h"
 #include "image.h"
@@ -377,7 +379,7 @@ void fill_truth(char *path, char **labels, int k, float *truth)
     int count = 0;
 	char* filename = basename(strdup(path));
     for(i = 0; i < k; ++i){
-        if(strstr(filename, labels[i])){
+        if(strcasestr(filename, labels[i])){
             truth[i] = 1;
             ++count;
         }
