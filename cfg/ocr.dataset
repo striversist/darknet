@@ -1,7 +1,7 @@
-classes=3
+classes=10
 train  = data/ocr/train.txt
 valid  = data/ocr/valid.txt
 backup = data/ocr/backup
 labels = data/ocr/labels.txt
 names  = data/ocr/names.txt
-top=1
+top=5
