@@ -379,8 +379,16 @@ void fill_truth(char *path, char **labels, int k, float *truth)
     int count = 0;
     char* cpath = strdup(path);
     char* filename = basename(cpath);
+    int ocr = 0;
+    if (strstr(filename, "_") != NULL) {    // OCR path
+        ocr = 1;
+        strtok(filename, "_");
+        filename = strtok(NULL, "_");   // new filename: eg. 157_lengths_44061.jpg -> lengths
+    }
     for(i = 0; i < k; ++i){
         if(strcasestr(filename, labels[i])){
+            if (ocr && (strlen(filename) != strlen(labels[i])))
+                continue;
             truth[i] = 1;
             ++count;
         }
