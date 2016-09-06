@@ -377,7 +377,8 @@ void fill_truth(char *path, char **labels, int k, float *truth)
     int i;
     memset(truth, 0, k*sizeof(float));
     int count = 0;
-	char* filename = basename(strdup(path));
+    char* cpath = strdup(path);
+    char* filename = basename(cpath);
     for(i = 0; i < k; ++i){
         if(strcasestr(filename, labels[i])){
             truth[i] = 1;
@@ -385,6 +386,7 @@ void fill_truth(char *path, char **labels, int k, float *truth)
         }
     }
     if(count != 1) printf("Too many or too few labels: %d, %s\n", count, path);
+    free(cpath);
 }
 
 matrix load_labels_paths(char **paths, int n, char **labels, int k)
